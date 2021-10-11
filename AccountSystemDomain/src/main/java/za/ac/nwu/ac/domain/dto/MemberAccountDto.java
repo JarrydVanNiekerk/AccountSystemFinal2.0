@@ -17,7 +17,7 @@ public class MemberAccountDto implements Serializable {
     private Long accountTypeId;
     private Integer balance;
     private LocalDate creationDate;
-
+//AccountTypeID returning null value;
     public MemberAccountDto() {
     }
 
