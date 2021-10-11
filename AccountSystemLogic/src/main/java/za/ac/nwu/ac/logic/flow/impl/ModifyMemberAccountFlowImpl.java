@@ -15,7 +15,7 @@ public class ModifyMemberAccountFlowImpl implements ModifyMemberAccountFlow {
 
     private static final Logger logger = LoggerFactory.getLogger(ModifyMemberAccountFlowImpl.class);
     private final MemberAccountTranslator translator;
-
+    public String msg = "Account could not be updated";
     public ModifyMemberAccountFlowImpl(MemberAccountTranslator translator) {
         this.translator = translator;
     }
@@ -27,39 +27,43 @@ public class ModifyMemberAccountFlowImpl implements ModifyMemberAccountFlow {
         if(amount>0) {
             amount=amount * -1;
         }
-        logger.info("Adding to Member Miles: " + "\n\tAmount = {}" +
+        logger.info("Adding Miles: " + "\n\tAmount = {}" +
                 "\n\tMember ID = {}" + "\n\tAccount Type ID = {}", amount,memberID,accountTypeID);
         Integer oldBal= 0;
         Integer newBal= 0;
         oldBal= translator.getMember(memberID,accountTypeID).getBalance();
         if(amount + oldBal >=0){
-            logger.info("Valid Transaction");
+            logger.info("Transaction Successful");
             newBal = amount + oldBal;
             MemberAccountDto result =translator.updateMemberAccount(newBal, memberID, accountTypeID);
-            logger.info("The Member Account was updated: {}",result);
+            logger.info("Account updated successfully: {}",result);
             return result;
         } else {
-            logger.info("Cannot subtract values larger than current account balance");
-            throw new RuntimeException("Unable to Update the database");
+            logger.info("Please ensure that the values are larger than the current balance");
+            throw new RuntimeException(msg);
         }
     }
     
     @Transactional
     @Override
     public MemberAccountDto addMiles(Integer amount, Long memberID, Long accountTypeID) {
+        try {
+            if (amount < 0) {
+                amount = amount * -1;
+            }
+            logger.info("Subtracting Miles: " + "\n\tAmount = {}" + "\n\tMember ID = {}" +
+                    "\n\tAccount Type ID = {}", amount, memberID, accountTypeID);
+            Integer oldBal = 0;
+            Integer newBal = 0;
+            oldBal = translator.getMember(memberID, accountTypeID).getBalance();
+            newBal = amount + oldBal;
+            MemberAccountDto result = translator.updateMemberAccount(newBal, memberID, accountTypeID);
+            logger.info("Account updated: {}", result);
+            return result;
+        } catch(Exception e) {
 
-        if(amount<0) {
-            amount = amount * -1;
+            throw new RuntimeException(msg);
         }
-        logger.info("Subtracting Miles from account: " + "\n\tAmount = {}" + "\n\tMember ID = {}" +
-                "\n\tAccount Type ID = {}", amount,memberID,accountTypeID);
-        Integer oldBal= 0;
-        Integer newBal= 0;
-        oldBal= translator.getMember(memberID,accountTypeID).getBalance();
-        newBal = amount + oldBal;
-        MemberAccountDto result =translator.updateMemberAccount(newBal, memberID, accountTypeID);
-        logger.info("The Member Account was updated: {}",result);
-        return result;
     }
 
 }
