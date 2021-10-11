@@ -39,9 +39,9 @@ public class MemberAccountDto implements Serializable {
             position = 1,
             value = "MemberAccount MemberID",
             name = "MemberID",
-            notes = "Unique Member ID for the Member that owns the account",
+            notes = "ID for the Member of account",
             dataType = "java.lang.String",
-            example ="110",
+            example ="12",
             required = true)
     public Long getMemberId() {
         return memberId;
@@ -55,7 +55,7 @@ public class MemberAccountDto implements Serializable {
             position = 2,
             value = "MemberAccount AccountType",
             name = "AccountTypeID",
-            notes = "The AccountTypeID for the specific AccountType",
+            notes = "ID for the certain AccountType",
             dataType = "java.lang.String",
             example = "2",
             required = true
@@ -72,8 +72,8 @@ public class MemberAccountDto implements Serializable {
             position = 3,
             value = "MemberAccount Account Balance",
             name = "balance",
-            notes = "Contains the amount of a currency that a User " +
-                    "has in their account and is allowed to spend.",
+            notes = "Contains currency amount that member " +
+                    "has",
             dataType = "java.lang.Integer",
             example = "5500",
             required = true
@@ -89,9 +89,9 @@ public class MemberAccountDto implements Serializable {
     @ApiModelProperty(
             position = 4,
             value = "MemberAccount Creation Date",
-            name = "The creation date of the MemberAccount",
+            name = "Creation date MemberAccount",
             dataType = "java.lang.String",
-            example = "2020-01-01",
+            example = "2020-10-06",
             required = true
     )
     public LocalDate getCreationDate() {

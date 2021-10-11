@@ -31,7 +31,7 @@ public class AccountTransactionController {
     }
 
     @GetMapping("/all") // fetch all configured account types
-    @ApiOperation(value = "Gets all the configured Account Transactions", notes = "Returns a list of Account Transactions")
+    @ApiOperation(value = "Get all Account Transactions", notes = "Returns all Account Transactions")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account Types Returned", response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
@@ -44,7 +44,7 @@ public class AccountTransactionController {
     }
 
     @PostMapping("")
-    @ApiOperation(value = "Create a new Account Transaction",notes = "Creates a new Account Transaction in the database")
+    @ApiOperation(value = "Create a new Account Transaction",notes = "Creates a new Account Transaction")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account created successfully", response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),

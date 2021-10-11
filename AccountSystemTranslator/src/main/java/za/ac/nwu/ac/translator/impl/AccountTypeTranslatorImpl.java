@@ -16,17 +16,17 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
     private final AccountTypeRepository accountTypeRepository;
 
     @Autowired
-    public AccountTypeTranslatorImpl(AccountTypeRepository accountTypeRepository) {
-        this.accountTypeRepository = accountTypeRepository;
+    public AccountTypeTranslatorImpl(AccountTypeRepository repo) {
+        this.accountTypeRepository = repo;
     }
 
     @Override
     public List<AccountTypeDto> getAllAccountTypes() {
         List<AccountTypeDto> accountTypeDtos = new ArrayList<>();
         try {
-          for (AccountType accountType: accountTypeRepository.findAll()) { // for all Accounts in the Repository
-              accountTypeDtos.add(new AccountTypeDto(accountType));
-          }
+            for (AccountType accountType: accountTypeRepository.findAll()) { // for all Accounts in the Repository
+                accountTypeDtos.add(new AccountTypeDto(accountType));
+            }
         } catch (Exception e) {
             // TODO: Log
             throw new RuntimeException("Unable to read from the database",e);

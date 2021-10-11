@@ -36,7 +36,7 @@ public class AccountTypeController {
     }
 
     @GetMapping("/all") // fetch all configured account types
-    @ApiOperation(value = "Gets all the configured Account types.", notes = "Returns a list of Account Types")
+    @ApiOperation(value = "Gets all Account types.", notes = "Returns all Account Types")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account Types Returned", response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
@@ -49,7 +49,7 @@ public class AccountTypeController {
     }
 
     @PostMapping("")
-    @ApiOperation(value = "Create a new AccountType",notes = "Creates a new AccountType in the database")
+    @ApiOperation(value = "Create an Account Type",notes = "Creates an Account Type ")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account created successfully", response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
@@ -63,14 +63,14 @@ public class AccountTypeController {
     }
 
     @GetMapping("{mnemonic}") // fetch all configured account types
-    @ApiOperation(value = "Fetch the specified Account Type", notes = "Fetches the Account Type based on the specific mnemonic")
+    @ApiOperation(value = "Fetch specified Account Type", notes = "Fetches the Account Type")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Goal Found", response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 404, message = "Resource Not Found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<AccountTypeDto>> getAccountType(
-            @ApiParam(value = "Mnemonic that uniquely identifies the account type",example = "MILES",
+            @ApiParam(value = "Uniquely identifies the account type",example = "Discovery Miles",
                     name = "mnemonic",required = true)
             @PathVariable("mnemonic") final String mnemonic
     ) {
@@ -80,24 +80,24 @@ public class AccountTypeController {
     }
 
     @PutMapping("{mnemonic}")
-    @ApiOperation(value="Updates an existing Account type.",notes = "Updates an existing Account type in the DB.")
+    @ApiOperation(value="Updates Account type.",notes = "Updates Account type")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Account Type Successfully Created", response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
 
     public ResponseEntity<GeneralResponse<AccountTypeDto>> updateAccountType(
-            @ApiParam(value = "Mnemonic that uniquely identifies the AccountType.",
-                    example = "MILES",
+            @ApiParam(value = "Uniquely identifies the AccountType.",
+                    example = "Discovery Miles",
                     name = "mnemonic",
                     required = true)
             @PathVariable("mnemonic") final String mnemonic,
-            @ApiParam(value = "The new AccountTypeName that the specified AccountType should be updated with. ",
-                    example = "MILES",
+            @ApiParam(value = "The new AccountTypeName  ",
+                    example = "Discovery Milesv2.0",
                     name = "newAccountTypeName",
                     required = true)
             @RequestParam(value ="newAccountTypeName") final String newAccountTypeName,
-            @ApiParam(value = "The optional new creation date in ISO format. (yyy-MM-dd) \n \r If empty or null, value will not be updated ",
+            @ApiParam(value = "Creation date in ISO format. (yyy-MM-dd) \n \r If empty or null, value will not be updated ",
                     name = "newCreationDate")
             @RequestParam(value ="newCreationDate", required = false)
             LocalDate newCreationDate) {

@@ -49,8 +49,8 @@ public class MemberAccountController {
     }
 
     @GetMapping("{memberId}/{accountTypeId}")
-    @ApiOperation(value="Gets a MemberAccount for specified MemberID and AccountTypeID",
-            notes = "Gets a MemberAccount for specified MemberID and AccountTypeID")
+    @ApiOperation(value="fetches an Account for a MemberID and AccountTypeID",
+            notes = "fetches an Account for MemberID and AccountTypeID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account Types Returned", response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
@@ -58,12 +58,12 @@ public class MemberAccountController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
     public ResponseEntity<GeneralResponse<MemberAccountDto>> getMember(
-            @ApiParam(value = "The MemberID that uniquely identifies the MemberAccountOwner.",
+            @ApiParam(value = "ID that identifies the MemberAccountOwner.",
                     name = "memberId",
-                    example = "110",
+                    example = "12",
                     required = true)
             @PathVariable("memberId") final String memberId,
-            @ApiParam(value = "The AccountTypeID that uniquely identifies the AccountType.",
+            @ApiParam(value = "ID uniquely identifies the AccountType.",
                     name = "accountTypeId",
                     example = "2",
                     required = true)
@@ -96,17 +96,17 @@ public class MemberAccountController {
     public ResponseEntity<GeneralResponse<MemberAccountDto>> subtractMiles(
             @ApiParam(value="Transaction Value",
                     name="subtractVal",
-                    example = "550",
+                    example = "100",
                     required = true)
             @PathVariable("subtractVal") final String transactionValue,
 
-            @ApiParam(value = "The MemberID that uniquely identifies the UserAccountOwner.",
+            @ApiParam(value = "ID that identifies the UserAccountOwner.",
                     name = "memberId",
-                    example = "110",
+                    example = "12",
                     required = true)
             @RequestParam("memberId") final Long memberId,
 
-            @ApiParam(value = "The AccountTypeID that uniquely identifies the AccountType.",
+            @ApiParam(value = "ID that identifies the AccountType.",
                     name="accountTypeId",
                     example = "2",
                     required = true)
@@ -128,7 +128,7 @@ public class MemberAccountController {
     }
 
     @PutMapping("add/{addVal}")
-    @ApiOperation(value = "Increases a UserAccount with the value of a transaction",
+    @ApiOperation(value = "Adds currency with the value of transcation",
             notes = "")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Account Type Successfully Created", response = GeneralResponse.class),
@@ -138,12 +138,12 @@ public class MemberAccountController {
     public ResponseEntity<GeneralResponse<MemberAccountDto>> addMiles(
             @ApiParam(value="Transaction Value",
                     name="addVal",
-                    example = "550",
+                    example = "100",
                     required = true)
             @PathVariable("addVal") final String transactionValue,
             @ApiParam(value = "The MemberID that uniquely identifies the UserAccountOwner.",
                     name = "memberId",
-                    example = "110",
+                    example = "12",
                     required = true)
             @RequestParam("memberId") final Long memberId,
             @ApiParam(value = "The AccountTypeID that uniquely identifies the AccountType.",
