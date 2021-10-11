@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CreateAccountTypeFlowImplTest {
-
+//Adding tests
     @InjectMocks
     private CreateAccountTypeFlowImpl flow;
     @Mock
@@ -30,7 +30,6 @@ public class CreateAccountTypeFlowImplTest {
     public void setUp() throws Exception {
 
     }
-
     @After
     public void tearDown() throws Exception {
     }
