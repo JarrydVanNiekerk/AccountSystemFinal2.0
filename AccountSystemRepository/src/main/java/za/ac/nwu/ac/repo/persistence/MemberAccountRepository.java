@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import za.ac.nwu.ac.domain.persistence.MemberAccount;
-//Remove excluded imports
+
 @Repository
 public interface MemberAccountRepository extends JpaRepository<MemberAccount, Long> {
-    @Query(value = "SELECT "+ "mb "+ "FROM " + "MemberAccount mb " + "WHERE " +
+    @Query(value = "SELECT " + "mb " + "FROM " + "MemberAccount mb " + "WHERE " +
             "mb.memberId = :memberId " + "AND mb.accountTypeId = :accountTypeId")
     MemberAccount getMember(Long memberId, Long accountTypeId);
 

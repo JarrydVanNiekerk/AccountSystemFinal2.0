@@ -12,19 +12,19 @@ import java.time.LocalDate;
 @Repository
 public interface AccountTypeRepository extends JpaRepository<AccountType, Long> {  // JPARepository<Type,ID_TYPE>
 
-    @Query(
+    @Query( // uses hibernate sql. Refers to database entities in application. More optimal for use on single tables
             value = "SELECT "+"at "+"FROM "+"AccountType at "+"WHERE at.mnemonic = :mnemonic"
     )
     AccountType getAccountTypeByMnemonic(String mnemonic);
 
-    @Query(
-           value = "SELECT new za.ac.nwu.ac.domain.dto.AccountTypeDto("+
-                   "at.mnemonic,"+"at.accountTypeName,"+"at.creationDate) "+
-                   "FROM "+"AccountType at "+"WHERE at.mnemonic = :mnemonic"
+    @Query( // Use this if you're working with multiple tables, joins etc.
+            value = "SELECT new za.ac.nwu.ac.domain.dto.AccountTypeDto("+
+                    "at.mnemonic,"+"at.accountTypeName,"+"at.creationDate) "+
+                    "FROM "+"AccountType at "+"WHERE at.mnemonic = :mnemonic"
     )
     AccountType getAccountTypeDtoByMnemonic(String mnemonic);
 
-    @Query(
+    @Query( // NB! Not recommended to use, since query won't work if you change databases, due to native nature
             value = "SELECT "+"ACCOUNT_TYPE_ID,"+"ACCOUNT_TYPE_NAME,"+"CREATION_DATE,"+"MNEMONIC "+
                     "FROM "+"HR.ACCOUNT_TYPE "+"WHERE MNEMONIC = :mnemonic", nativeQuery = true
     )
